@@ -1,69 +1,7 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="en">
-<head>
-    <title>AngularJS Routes example</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
-    <script src="{% static 'angularapp/js/app.js' %}"></script>
-    <script src="../static/angularapp/js/bower_components/webcamjs/webcam.js"></script>
-    <script src="../static/angularapp/js/bower_components/ng-camera/dist/ng-camera.js"></script>
-    <script>
-    	function geoFindMe() {
-  			var output = document.getElementById("out");
+{% extends 'base.html' %}
 
-  			if (!navigator.geolocation){
-    			output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    			return;
-  			}
-
-  			console.log(navigator.geolocation);
-
-  			function success(position) {
-  				var latitude = position.coords.latitude;
-  				var longitude = position.coords.longitude;
-
-  				output.innerHTML = "Latitude is " + latitude + "<br>Longitude is " + longitude;
-  			}
-
-  			function error() {
-    			output.innerHTML = "Unable to retrieve your location";
-  			}
-
-  			output.innerHTML = "<p>Locating…</p>";
-
-  			navigator.geolocation.getCurrentPosition(success, error);
-  		}
-	</script>
-</head>
-
-<body ng-app="sampleApp">
-
-<a href="#/route1">Route 1</a><br/>
-<a href="#/route2">Route 2</a><br/>
-<p>Click the button to get your coordinates.</p>
-<button onclick="geoFindMe()">Try It</button>
-<p id="out">
-</p>
-<ng-camera
-        capture-message="Cheeeese!"
-        countdown="3"
-        output-height="160"
-        output-width="213"
-        viewer-height="320"
-        viewer-width="426"
-        image-format="jpeg"
-        jpeg-quality="100"
-        action-message="Take picture"
-        snapshot="vm.picture"
-        flash-fallback-url="/vendors/webcamjs/webcam.swf"
-        overlay-url="/overlay.png"
-        shutter-url="/shutter.mp3"
-></ng-camera>
-<div ng-view></div>
-
-<script>
-var static_url = '{{STATIC_URL}}'
-</script>
-</body>
-</html>
+{% block content %}
+  <a href="#!/route1">Route 1</a><br/>
+  <a href="#!/route2">Route 2</a><br/>
+  <div ng-view></div>
+{% endblock %}
