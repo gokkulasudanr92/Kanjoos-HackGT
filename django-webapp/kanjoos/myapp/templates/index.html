@@ -6,13 +6,43 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
     <script src="{% static 'angularapp/js/app.js' %}"></script>
+    <script>
+    	function geoFindMe() {
+  			var output = document.getElementById("out");
+
+  			if (!navigator.geolocation){
+    			output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
+    			return;
+  			}
+
+  			console.log(navigator.geolocation);
+
+  			function success(position) {
+  				var latitude = position.coords.latitude;
+  				var longitude = position.coords.longitude;
+
+  				output.innerHTML = "Latitude is " + latitude + "<br>Longitude is " + longitude;
+  			}
+
+  			function error() {
+    			output.innerHTML = "Unable to retrieve your location";
+  			}
+
+  			output.innerHTML = "<p>Locating…</p>";
+
+  			navigator.geolocation.getCurrentPosition(success, error);
+  		}
+	</script>
 </head>
 
 <body ng-app="sampleApp">
 
 <a href="#/route1">Route 1</a><br/>
 <a href="#/route2">Route 2</a><br/>
-
+<p>Click the button to get your coordinates.</p>
+<button onclick="geoFindMe()">Try It</button>
+<p id="out">
+</p>
 
 <div ng-view></div>
 
