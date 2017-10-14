@@ -6,6 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
     <script src="{% static 'angularapp/js/app.js' %}"></script>
+    <script src="../static/angularapp/js/bower_components/webcamjs/webcam.js"></script>
+    <script src="../static/angularapp/js/bower_components/ng-camera/dist/ng-camera.js"></script>
     <script>
     	function geoFindMe() {
   			var output = document.getElementById("out");
@@ -43,7 +45,21 @@
 <button onclick="geoFindMe()">Try It</button>
 <p id="out">
 </p>
-
+<ng-camera
+        capture-message="Cheeeese!"
+        countdown="3"
+        output-height="160"
+        output-width="213"
+        viewer-height="320"
+        viewer-width="426"
+        image-format="jpeg"
+        jpeg-quality="100"
+        action-message="Take picture"
+        snapshot="vm.picture"
+        flash-fallback-url="/vendors/webcamjs/webcam.swf"
+        overlay-url="/overlay.png"
+        shutter-url="/shutter.mp3"
+></ng-camera>
 <div ng-view></div>
 
 <script>
