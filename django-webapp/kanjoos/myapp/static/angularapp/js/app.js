@@ -1,4 +1,4 @@
-var module = angular.module("sampleApp", ['ngRoute']);
+var module = angular.module("sampleApp", ['ngRoute', 'camera']);
 module.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
 })
