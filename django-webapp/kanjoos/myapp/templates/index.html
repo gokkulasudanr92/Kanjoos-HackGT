@@ -1,7 +1,105 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-  <a href="#!/route1">Route 1</a><br/>
-  <a href="#!/route2">Route 2</a><br/>
-  <div ng-view></div>
-{% endblock %}
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Kanjoos - Click and Check!</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/landing-page.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="intro-message">
+            <div id="results">Your captured image will appear here...</div>
+
+            <div id="my_camera" style="width: 320px; height: 240px;"><div></div><video autoplay="autoplay" playsinline="playsinline" src="blob:https://pixlcore.com/f1d22f6c-9937-4d0a-8e53-2fff1877adee" style="width: 320px; height: 240px;"></video></div>
+
+            <!-- First, include the Webcam.js JavaScript Library -->
+            <script type="text/javascript" src="../static/vendor/js/webcam.min.js"></script>
+
+            <!-- Configure a few settings and attach camera -->
+            <script language="JavaScript">
+                Webcam.set({
+                    width: 320,
+                    height: 240,
+                    image_format: 'jpeg',
+                    jpeg_quality: 90
+                });
+                Webcam.attach( '#my_camera' );
+            </script>
+
+            <!-- A button for taking snaps -->
+            <form>
+                <input type="button" value="Take Snapshot" onclick="take_snapshot()">
+            </form>
+
+            <!-- Code to handle taking the snapshot and displaying it locally -->
+            <script language="JavaScript">
+                function take_snapshot() {
+                    // take snapshot and get image data
+                    Webcam.snap( function(data_uri) {
+                        // display results in page
+                        document.getElementById('results').innerHTML =
+                            '<h2>Here is your image:</h2>' +
+                            '<img src="'+data_uri+'"/>';
+                    } );
+                }
+            </script>
+        </div>
+    </div>
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</header>
+
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/vendor/popper/popper.min.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
