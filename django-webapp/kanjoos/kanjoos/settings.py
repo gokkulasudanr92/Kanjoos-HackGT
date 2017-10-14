@@ -25,7 +25,7 @@ SECRET_KEY = '5_ey88t-#!-)51^x+6vezu+xw+3(gmd*+o!q651yr11l-znbp4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -131,3 +131,5 @@ REST_FRAMEWORK = {
 	)
 	
 }
+
+LOGIN_REDIRECT_URL = 'home'
