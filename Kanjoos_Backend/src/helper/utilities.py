@@ -4,7 +4,11 @@ import os,glob,cv2
 import sys,argparse
 from google.cloud import vision
 from google.cloud.vision import types
-
+import webcolors
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__),'..','constants'))
+import Constant
+print(Constant.Classifier_Model)
 def predict_tf_logo(image):
     image_size=300
     num_channels=3
@@ -41,7 +45,7 @@ def predict_vision_logo(image):
     logos = response.logo_annotations
     if len(logos) == 0:
         return None
-    else
+    else:
         for logo in logos:
             return logo.description
 
@@ -52,7 +56,7 @@ def predict_vision_label(image):
     labels = response.label_annotations
     if len(labels) == 0:
         return None
-    else
+    else:
         label_list = list()
         for i,label in enumerate(labels):
             label_list.append(logo.description)
@@ -67,7 +71,7 @@ def predict_vision_text(image):
     texts = response.text_annotations
     if len(text) == 0:
         return None
-    else
+    else:
         text_list = list()
         for i,text in enumerate(texts):
             text_list.append(text.description)
@@ -79,13 +83,11 @@ def predict_vision_text(image):
         client = vision.ImageAnnotatorClient()
         image = types.Image(content=image)
         response = client.text_detection(image=image)
-        texts = response.text_annotations
-        if len(text) == 0:
-            return None
-        else
-            text_list = list()
-            for i,text in enumerate(texts):
-                text_list.append(text.description)
-                if( i > 5):
-                    break
-            return ','.join(label_list)
+        response = client.image_properties(image=image)
+        props = response.image_properties_annotation
+        color_list = list()
+        for i,color in enumerate(props.dominant_colors.colors):
+            color_list.append(webcolors.rgb_to_hex((color.color.red,color.color,green,color.color.blue)))
+            if(i > 3):
+                break
+        return color_list
