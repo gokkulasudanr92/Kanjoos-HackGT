@@ -53,5 +53,39 @@ def predict_vision_label(image):
     if len(labels) == 0:
         return None
     else
-        for label in labels:
-            return logo.description
+        label_list = list()
+        for i,label in enumerate(labels):
+            label_list.append(logo.description)
+            if( i > 5):
+                break
+        return ','.join(label_list)
+
+def predict_vision_text(image):
+    client = vision.ImageAnnotatorClient()
+    image = types.Image(content=image)
+    response = client.text_detection(image=image)
+    texts = response.text_annotations
+    if len(text) == 0:
+        return None
+    else
+        text_list = list()
+        for i,text in enumerate(texts):
+            text_list.append(text.description)
+            if( i > 5):
+                break
+        return ','.join(text_list)
+
+    def predict_vision_color(image):
+        client = vision.ImageAnnotatorClient()
+        image = types.Image(content=image)
+        response = client.text_detection(image=image)
+        texts = response.text_annotations
+        if len(text) == 0:
+            return None
+        else
+            text_list = list()
+            for i,text in enumerate(texts):
+                text_list.append(text.description)
+                if( i > 5):
+                    break
+            return ','.join(label_list)
