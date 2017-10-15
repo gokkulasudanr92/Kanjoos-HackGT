@@ -30,6 +30,9 @@ class ListCreateCourse(APIView):
 def list(req):
 	# Logic to get list of the data
 	# Integrate the JSON here
+	images = models.ImageInfo.objects.all()
+	for image in images:
+		# For image format refer in models.py file in myapp folder
 	return render(req, 'list.html', {'STATIC_URL': settings.STATIC_URL})
 
 class ListCreateImageInfo(APIView):
