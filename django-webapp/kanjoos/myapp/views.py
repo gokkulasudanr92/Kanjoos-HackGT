@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -37,3 +38,26 @@ class ListCreateImageInfo(APIView):
 	    serializer.is_valid(raise_exception=True)
 	    serializer.save()
 	    return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class ImageInfoDetail(APIView):
+	@csrf_exempt
+	def get_object(self, pk):
+		try:
+			return models.ImageInfo.objects.get(pk=pk)
+		except models.ImageInfo.DoesNotExist:
+			raise Http404
+
+	@csrf_exempt
+	def get(self, request, pk, format=None):
+		image = self.get_object(pk)
+		serializer = serializers.ImageSerializer(image)
+		return Response(serializer.data)
+
+	@csrf_exempt
+	def put(self, request, pk, format=None):
+		image = self.get_object(pk)
+		serializer = serializers.ImageSerializer(image, data=request.data)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_201_CREATED)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
