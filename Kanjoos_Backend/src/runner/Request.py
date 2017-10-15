@@ -30,6 +30,7 @@ class Request(object):
     def __init__(self,img_bytearray):
         self.img_bytearray = img_bytearray
         self.image = cv2.imdecode(np.fromstring(img_bytearray,np.uint8),cv2.IMREAD_UNCHANGED)
+        # print('Response Initialized')
         self.response = self.generate_response()
 
     def generate_response(self):
@@ -52,4 +53,5 @@ class Request(object):
         response['label'] = label_annotation_vision
         response['text'] = text_annotation_vision
         response['color'] = color_annotation_vision
+        # print(response)
         return response
