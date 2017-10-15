@@ -6,7 +6,7 @@ import utilities
 import Request
 from Request import Request
 
-image = cv2.imread("/home/vijayaganesh/Downloads/IMG_1586.jpg")
+image = cv2.imread("/home/vijayaganesh/Downloads/IMG_1583.jpg")
 img_array = cv2.imencode('.jpg', image)[1].tostring()
 request = Request(img_array)
 print(request.response)

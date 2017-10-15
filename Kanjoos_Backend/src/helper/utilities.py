@@ -26,13 +26,18 @@ def predict_tf_logo(image):
     saver = tf.train.import_meta_graph(Constant.Classifier_Model)
     saver.restore(sess, tf.train.latest_checkpoint(Constant.Classifier_location))
     graph = tf.get_default_graph()
+    # print('here')
     y_pred = graph.get_tensor_by_name("y_pred:0")
     x= graph.get_tensor_by_name("x:0")
     y_true = graph.get_tensor_by_name("y_true:0")
     y_test_images = np.zeros((1, 3))
-    print('here')
+    # print('here')
     feed_dict_testing = {x: x_batch, y_true: y_test_images}
-    result=sess.run(y_pred, feed_dict=feed_dict_testing).tolist()
+    # print(type(Constant.classes))
+    # print(Constant.classes)
+    result=sess.run(y_pred, feed_dict=feed_dict_testing)[0]
+    # print(type(result))
+    # print(result)
     result_dict = dict(zip(Constant.classes,result))
     print(result_dict)
     return sorted(result_dict, key = result_dict.get, reverse = True)[0]
@@ -73,7 +78,7 @@ def predict_vision_text(image):
     else:
         text_list = list()
         for i,text in enumerate(texts):
-            text_list.append(text.description)
+            text_list.append(text.description.replace("\n"," "))
             if( i > 5):
                 break
         return ','.join(text_list)
