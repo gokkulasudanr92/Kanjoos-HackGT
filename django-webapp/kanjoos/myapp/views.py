@@ -33,7 +33,7 @@ class ListCreateImageInfo(APIView):
 
 	@csrf_exempt
 	def post(self, request, format=None):
-		serializer = serializers.ImageSerializer(data=request.data)
-		serializer.is_valid(raise_exception=True)
-		serializer.save()
-		return Response(serializer.data, status=status.HTTP_201_CREATED)
+	    serializer = serializers.ImageSerializer(data=request.data)
+	    serializer.is_valid(raise_exception=True)
+	    serializer.save()
+	    return Response(serializer.data, status=status.HTTP_201_CREATED)
