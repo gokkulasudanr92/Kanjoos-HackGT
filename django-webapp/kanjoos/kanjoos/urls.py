@@ -27,4 +27,5 @@ urlpatterns = [
     url(r'^$', myapp_views.index, name='index'),
     url(r'^api/v1/courses', include('myapp.urls', namespace='courses')),
     url(r'^api/v1/images/', include('myapp.urls', namespace='images')),
+    url(r'^list$', myapp_views.list, name='list'),
 ]

@@ -32,3 +32,10 @@ class ImageInfo(models.Model):
 
 	def __str__(self):
 		return self.imageUri
+
+class ImageURI(models.Model):
+	image = models.ForeignKey(ImageInfo, related_name='image')
+	uri = models.TextField(blank=True,null=True)
+
+	def __str__(self):
+		return self.uri

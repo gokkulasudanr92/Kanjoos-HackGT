@@ -10,6 +10,8 @@ from rest_framework import status
 from . import models
 from . import serializers
 
+# Add Imports here 
+
 def index(req):
     return render(req, 'index.html', {'STATIC_URL': settings.STATIC_URL})
 
@@ -24,6 +26,11 @@ class ListCreateCourse(APIView):
 		serializer.is_valid(raise_exception=True)
 		serializer.save()
 		return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+def list(req):
+	# Logic to get list of the data
+	# Integrate the JSON here
+	return render(req, 'list.html', {'STATIC_URL': settings.STATIC_URL})
 
 class ListCreateImageInfo(APIView):
 	@csrf_exempt

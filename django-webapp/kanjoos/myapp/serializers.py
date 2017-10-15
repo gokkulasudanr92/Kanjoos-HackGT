@@ -38,3 +38,12 @@ class ImageSerializer(serializers.ModelSerializer):
                 'status'
         )
         model = models.ImageInfo
+
+class ImageURISerializer(serializers.ModelSerializer):
+	class Meta:
+		fields = (
+				'id',
+				'image',
+				'uri'
+			)
+		model = models.ImageURI
