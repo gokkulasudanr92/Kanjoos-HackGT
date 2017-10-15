@@ -1,7 +1,8 @@
-var module = angular.module("sampleApp", ['ngRoute', 'camera']);
+var module = angular.module("sampleApp", ['ngRoute', 'textAngular']);
 module.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[').endSymbol(']]');
 })
+
 module.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider.
@@ -19,8 +20,10 @@ module.config(['$routeProvider',
     }]);
 
 module.controller("RouteController1", function($scope) {
+    console.log("/route1 ... ");
     $scope.test="This is working test1"
 });
 module.controller("RouteController2", function($scope) {
+    condole.log("/route2 ... ");
     $scope.test="This is working test2"
 });

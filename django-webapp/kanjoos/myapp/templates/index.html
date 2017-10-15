@@ -1,69 +1,105 @@
 <!DOCTYPE html>
-{% load staticfiles %}
 <html lang="en">
+
 <head>
-    <title>AngularJS Routes example</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
-    <script src="{% static 'angularapp/js/app.js' %}"></script>
-    <script src="../static/angularapp/js/bower_components/webcamjs/webcam.js"></script>
-    <script src="../static/angularapp/js/bower_components/ng-camera/dist/ng-camera.js"></script>
-    <script>
-    	function geoFindMe() {
-  			var output = document.getElementById("out");
 
-  			if (!navigator.geolocation){
-    			output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    			return;
-  			}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  			console.log(navigator.geolocation);
+    <title>Kanjoos - Click and Check!</title>
 
-  			function success(position) {
-  				var latitude = position.coords.latitude;
-  				var longitude = position.coords.longitude;
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  				output.innerHTML = "Latitude is " + latitude + "<br>Longitude is " + longitude;
-  			}
+    <!-- Custom fonts for this template -->
+    <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
-  			function error() {
-    			output.innerHTML = "Unable to retrieve your location";
-  			}
+    <!-- Custom styles for this template -->
+    <link href="../static/css/landing-page.css" rel="stylesheet">
 
-  			output.innerHTML = "<p>Locating…</p>";
-
-  			navigator.geolocation.getCurrentPosition(success, error);
-  		}
-	</script>
 </head>
 
-<body ng-app="sampleApp">
+<body>
 
-<a href="#/route1">Route 1</a><br/>
-<a href="#/route2">Route 2</a><br/>
-<p>Click the button to get your coordinates.</p>
-<button onclick="geoFindMe()">Try It</button>
-<p id="out">
-</p>
-<ng-camera
-        capture-message="Cheeeese!"
-        countdown="3"
-        output-height="160"
-        output-width="213"
-        viewer-height="320"
-        viewer-width="426"
-        image-format="jpeg"
-        jpeg-quality="100"
-        action-message="Take picture"
-        snapshot="vm.picture"
-        flash-fallback-url="/vendors/webcamjs/webcam.swf"
-        overlay-url="/overlay.png"
-        shutter-url="/shutter.mp3"
-></ng-camera>
-<div ng-view></div>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<script>
-var static_url = '{{STATIC_URL}}'
-</script>
+<!-- Header -->
+<header class="intro-header">
+    <div class="container">
+        <div class="intro-message">
+            <div id="results">Your captured image will appear here...</div>
+
+            <div id="my_camera" style="width: 320px; height: 240px;"><div></div><video autoplay="autoplay" playsinline="playsinline" src="blob:https://pixlcore.com/f1d22f6c-9937-4d0a-8e53-2fff1877adee" style="width: 320px; height: 240px;"></video></div>
+
+            <!-- First, include the Webcam.js JavaScript Library -->
+            <script type="text/javascript" src="../static/vendor/js/webcam.min.js"></script>
+
+            <!-- Configure a few settings and attach camera -->
+            <script language="JavaScript">
+                Webcam.set({
+                    width: 320,
+                    height: 240,
+                    image_format: 'jpeg',
+                    jpeg_quality: 90
+                });
+                Webcam.attach( '#my_camera' );
+            </script>
+
+            <!-- A button for taking snaps -->
+            <form>
+                <input type="button" value="Take Snapshot" onclick="take_snapshot()">
+            </form>
+
+            <!-- Code to handle taking the snapshot and displaying it locally -->
+            <script language="JavaScript">
+                function take_snapshot() {
+                    // take snapshot and get image data
+                    Webcam.snap( function(data_uri) {
+                        // display results in page
+                        document.getElementById('results').innerHTML =
+                            '<h2>Here is your image:</h2>' +
+                            '<img src="'+data_uri+'"/>';
+                    } );
+                }
+            </script>
+        </div>
+    </div>
+    <link rel="stylesheet" href="../static/css/style.css">
+
+</header>
+
+
+
+
+<!-- Bootstrap core JavaScript -->
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/vendor/popper/popper.min.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+
 </body>
+
 </html>
