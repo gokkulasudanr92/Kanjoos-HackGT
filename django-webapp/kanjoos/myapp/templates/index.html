@@ -28,7 +28,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -53,7 +54,12 @@
         <div class="intro-message">
             <div id="results">Your captured image will appear here...</div>
 
-            <div id="my_camera" style="width: 320px; height: 240px;"><div></div><video autoplay="autoplay" playsinline="playsinline" src="blob:https://pixlcore.com/f1d22f6c-9937-4d0a-8e53-2fff1877adee" style="width: 320px; height: 240px;"></video></div>
+            <div id="my_camera" style="width: 320px; height: 240px;">
+                <div></div>
+                <video autoplay="autoplay" playsinline="playsinline"
+                       src="blob:https://pixlcore.com/f1d22f6c-9937-4d0a-8e53-2fff1877adee"
+                       style="width: 320px; height: 240px;"></video>
+            </div>
 
             <!-- First, include the Webcam.js JavaScript Library -->
             <script type="text/javascript" src="../static/vendor/js/webcam.min.js"></script>
@@ -66,7 +72,7 @@
                     image_format: 'jpeg',
                     jpeg_quality: 90
                 });
-                Webcam.attach( '#my_camera' );
+                Webcam.attach('#my_camera');
             </script>
 
             <!-- A button for taking snaps -->
@@ -78,12 +84,31 @@
             <script language="JavaScript">
                 function take_snapshot() {
                     // take snapshot and get image data
-                    Webcam.snap( function(data_uri) {
+                    Webcam.snap(function (data_uri) {
                         // display results in page
-                        document.getElementById('results').innerHTML =
-                            '<h2>Here is your image:</h2>' +
-                            '<img src="'+data_uri+'"/>';
-                    } );
+                        var data = {}
+
+                        document.getElementById('results').innerHTML = '<img id="img_data" src="' + data_uri + '"/>';
+                        var uri = document.getElementById('img_data').getAttribute('src');
+                        data["imageUri"] = uri;
+                        console.log(data);
+
+                        $.ajax({
+                            url: './api/v1/images/data',
+                            type: 'POST',
+                            contentType: "application/json",
+                            data: JSON.stringify(data),
+                            success: function(result) {
+                                alert("Sucess!")
+                            },
+                            error: function(result) {
+                                alert("Image Upload Failed!");
+                            }
+                        });
+                        /*Webcam.upload(data_uri, "./api/v1/images/data", function(code, text) {
+
+                        });*/
+                    });
                 }
             </script>
         </div>
@@ -91,8 +116,6 @@
     <link rel="stylesheet" href="../static/css/style.css">
 
 </header>
-
-
 
 
 <!-- Bootstrap core JavaScript -->

@@ -27,14 +27,14 @@ class CourseSerializer(serializers.ModelSerializer):
 		model = models.Course
 
 class ImageSerializer(serializers.ModelSerializer):
-	class Meta:
-		fields = (
-				'id',
-				'imageUri',
-				'logo',
-				'color',
-				'label',
-				'text',
-				'status'
-			)
-		model = models.ImageInfo
+    class Meta:
+        fields = (
+                'id',
+                'imageUri',
+                'logo',
+                'color',
+                'label',
+                'text',
+                'status'
+        )
+        model = models.ImageInfo

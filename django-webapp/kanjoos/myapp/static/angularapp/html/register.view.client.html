@@ -1,0 +1,85 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Register
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12">
+    <div class="front signin_form">
+        <div class="topicForm">Register For An Account</div>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+        <form class="login-form">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <input ng-model="username" type="text" class="form-control"
+                           placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <input ng-model="firstName" type="text" class="form-control"
+                           placeholder="FirstName">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <input ng-model="lastName" type="text" class="form-control"
+                           placeholder="LastName">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    <input ng-model="password" type="password" class="form-control" placeholder="Choose a Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </span>
+                    <input ng-model="verifypassword" type="password" class="form-control"
+                           placeholder="Retype the Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                    </span>
+                    <input ng-model="email" type="email" class="form-control" placeholder="youremail@gmail.com">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-phone"></i>
+                    </span>
+                    <input ng-model="phone" type="text" class="form-control" placeholder="Phone Number">
+                </div>
+            </div>
+            <div class="form-group sign-btn">
+                <a class="btn btn-primary btn-block"
+                   ng-click="model.register(username,'USER', firstName, lastName, password, verifypassword, email, phone)">
+                    Register</a>
+                <a class="btn btn-danger btn-block"
+                   href="#!/login">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

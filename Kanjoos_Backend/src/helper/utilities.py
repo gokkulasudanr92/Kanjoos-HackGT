@@ -24,7 +24,6 @@ def predict_tf_logo(image):
     x_batch = images.reshape(1, image_size,image_size,num_channels)
     sess = tf.Session()
     saver = tf.train.import_meta_graph(Constant.Classifier_Model)
-    print(Constant.Classifier_location)
     saver.restore(sess, tf.train.latest_checkpoint(Constant.Classifier_location))
     graph = tf.get_default_graph()
     y_pred = graph.get_tensor_by_name("y_pred:0")
