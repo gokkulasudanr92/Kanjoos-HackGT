@@ -53,5 +53,5 @@ class Request(object):
 	    response['text'] = text_annotation_vision
 	    response['color'] = color_annotation_vision
 	    json_response = json.dump(response)
-	    print(json_response)
+	    # print(json_response)
 	    return json_response
